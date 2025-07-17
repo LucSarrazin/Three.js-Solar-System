@@ -40,7 +40,7 @@ loader.load( '/SpaceShip/scene.gltf', function ( gltf ) {
   gltf.scene.position.set(2, 0.5, 0); // Adjust position
   //gltf.scene.rotation.set(0,0,0); // Adjust rotation
   SpaceShip.add(gltf.scene); // Add the spaceship model to the empty object
-  scene.add( gltf.scene );
+  scene.add( SpaceShip );
 
 }, undefined, function ( error ) {
 
@@ -68,6 +68,10 @@ function animate() {
   cube.rotation.y += 0.01;
   sphere.rotation.x += 0.01;
   sphere.rotation.y += 0.01;
+  SpaceShip.rotation.y += 0.005; // Rotate the spaceship
+  SpaceShip.rotation.x += 0.005; // Rotate the spaceship on the x-axis
+  SpaceShip.rotation.z += 0.005; // Rotate the spaceship on the z-axis
+
   animationCamera();
 
   renderer.render(scene, camera);
