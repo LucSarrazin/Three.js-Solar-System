@@ -11,11 +11,13 @@ const camera = new THREE.PerspectiveCamera(
 const loader = new GLTFLoader();
 
 const moonTexture = new THREE.TextureLoader().load('MoonTexture.jpg');
+const spaceTexture = new THREE.TextureLoader().load('Space.jpg');
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
+scene.background = spaceTexture; // Set the background to space texture
 
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.5)); // Add ambient light
