@@ -78,6 +78,8 @@ sun.position.set(-5, 0, 0); // Positionner le Soleil à gauche de la Terre
 sun.receiveShadow = true; // Permet au Soleil de recevoir des ombres
 sun.castShadow = true; // Permet au Soleil de projeter des ombres
 sun.name = "Sun"; // Nommer le Soleil pour l'identifier
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // ou autre type
 scene.add(sun);
 
 // Création de Mercure
@@ -150,7 +152,8 @@ const cloudsMaterial = new THREE.MeshPhongMaterial({
 const clouds = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
 clouds.position.set(5, 0, 0);
 clouds.receiveShadow = true;
-clouds.castShadow = true;
+cloudsMaterial.depthWrite = false;
+clouds.renderOrder = 1;
 clouds.name = "Earth"; // Nommer les nuages pour l'identifier
 earthOrbit.add(clouds);
 
@@ -216,7 +219,7 @@ const SaturnRingMaterial = new THREE.MeshBasicMaterial({
   map: SaturnRingTexture,
   side: THREE.DoubleSide,
   transparent: true,
-  opacity: 0.5
+  opacity: 0.2
 });
 const SaturnRing = new THREE.Mesh(SaturnRingGeometry, SaturnRingMaterial);
 SaturnRing.rotation.x = -Math.PI / 2;
@@ -252,14 +255,10 @@ scene.add(neptuneOrbit);
 
 
 
-// Lumière directionnelle pour simuler la lumière du Soleil
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(-5, 5, 5).normalize();
-scene.add(directionalLight);
 
-// Lumière ambiante pour éclairer la scène
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Lumière ambiante douce
+const ambientLight = new THREE.AmbientLight(0x404040, 3); // Lumière ambiante
 scene.add(ambientLight);
+
 
 function createOrbit(radius, color = 0xffffff) {
   const segments = 100;
@@ -305,15 +304,16 @@ function animate() {
     const delta = clock.getDelta();
     controls.update(delta); 
 
-    mercuryOrbit.rotation.y += 0.02; // rapide
-    venusOrbit.rotation.y += 0.01;   // un peu plus lent
-    earthOrbit.rotation.y += 0.008;
-    MoonOrbit.rotation.y += 0.003; // Tourne vite autour de la Terre
-    marsOrbit.rotation.y += 0.007;
-    jupiterOrbit.rotation.y += 0.005;
-    saturnOrbit.rotation.y += 0.0035;
-    uranusOrbit.rotation.y += 0.002;
-    neptuneOrbit.rotation.y += 0.001;   
+    mercuryOrbit.rotation.y += 0.5 * delta;
+    venusOrbit.rotation.y += 0.25 * delta;
+    earthOrbit.rotation.y += 0.2 * delta;
+    MoonOrbit.rotation.y += 0.4 * delta;
+    marsOrbit.rotation.y += 0.15 * delta;
+    jupiterOrbit.rotation.y += 0.1 * delta;
+    saturnOrbit.rotation.y += 0.07 * delta;
+    uranusOrbit.rotation.y += 0.04 * delta;
+    neptuneOrbit.rotation.y += 0.02 * delta;
+ 
 
     mercury.rotation.y += 0.001; // Rotation de Mercure
     Venus.rotation.y += 0.001; // Rotation de Vénus
@@ -337,6 +337,7 @@ function animate() {
     updateInfoBox(Saturn, document.getElementById("infoBoxSaturn"));
     updateInfoBox(Uranus, document.getElementById("infoBoxUranus"));
     updateInfoBox(Neptune, document.getElementById("infoBoxNeptune"));
+    updateInfoBox(sun, document.getElementById("infoBoxSun"));
 
 
 
