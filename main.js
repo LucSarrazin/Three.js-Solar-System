@@ -5,6 +5,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 
+
 // Création de la scène et de la caméra adapté à la taille de l'écran
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -21,9 +22,20 @@ renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
 // Texture de l'arrière-plan
-scene.background = new THREE.TextureLoader().load('Space.jpg');
-const starsMat = new THREE.TextureLoader().load('Space.jpg');
+//scene.background = new THREE.TextureLoader().load('Space.jpg');
+//const starsMat = new THREE.TextureLoader().load('Space.jpg');
+const textureLoader = new THREE.TextureLoader();
+const starsTextureUrl = '/stars.jpg';  // chemin relatif depuis la racine public
 
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+scene.background = cubeTextureLoader.load([
+  starsTextureUrl,
+  starsTextureUrl,
+  starsTextureUrl,
+  starsTextureUrl,
+  starsTextureUrl,
+  starsTextureUrl,
+]);
 // Chargement des textures
 const EarthNightTexture = new THREE.TextureLoader().load('EarthNight.jpg');
 const EarthDayTexture = new THREE.TextureLoader().load('EarthDay.jpg');
@@ -291,6 +303,20 @@ const moonOrbit = createOrbit(1);
 moonOrbit.position.set(5, 0, 0); // Terre est à x = 5 dans earthOrbit
 earthOrbit.add(moonOrbit);
 
+function addStar() {
+  const geometry = new THREE.SphereGeometry(0.05, 24, 24);
+  const material = new THREE.MeshStandardMaterial({ map: SaturnRingTexture, emissive: 0xffffff });
+  const star = new THREE.Mesh(geometry, material);
+
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
+
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(500).fill().forEach(addStar);
 
 
 // Positionner la caméra
