@@ -77,6 +77,7 @@ const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 sun.position.set(-5, 0, 0); // Positionner le Soleil à gauche de la Terre
 sun.receiveShadow = true; // Permet au Soleil de recevoir des ombres
 sun.castShadow = true; // Permet au Soleil de projeter des ombres
+sun.name = "Sun"; // Nommer le Soleil pour l'identifier
 scene.add(sun);
 
 // Création de Mercure
@@ -88,6 +89,7 @@ const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 mercury.position.set(2.5, 0, 0);
 mercury.receiveShadow = true;
 mercury.castShadow = true;
+mercury.name = "Mercury"; // Nommer Mercure pour l'identifier
 //scene.add(mercury);
 
 mercuryOrbit.add(mercury);
@@ -105,6 +107,7 @@ const Venus = new THREE.Mesh(VenusGeometry, VenusMaterial);
 Venus.position.set(3.5, 0, 0);
 Venus.receiveShadow = true;
 Venus.castShadow = true;
+Venus.name = "Venus"; // Nommer Vénus pour l'identifier
 //scene.add(Venus);
 venusOrbit.add(Venus);
 scene.add(venusOrbit);
@@ -116,6 +119,7 @@ const VenusAtmosphereGeometry = new THREE.SphereGeometry(0.32, 32, 32);
 const VenusAtmosphereMaterial = new THREE.MeshBasicMaterial({ map: VenusAtmosphereTexture, transparent: true, opacity: 0.2 });
 const VenusAtmosphere = new THREE.Mesh(VenusAtmosphereGeometry, VenusAtmosphereMaterial);
 VenusAtmosphere.position.set(3.5, 0, 0); // Positionner l'atmosphère autour de Venus
+VenusAtmosphere.name = "Venus"; // Nommer l'atmosphère de Vénus pour l'identifier
 //scene.add(VenusAtmosphere);
 venusOrbit.add(VenusAtmosphere);
 
@@ -132,6 +136,7 @@ const terre = new THREE.Mesh(terreGeometry, terreMaterial);
 terre.position.set(5, 0, 0);
 terre.receiveShadow = true;
 terre.castShadow = true;
+terre.name = "Earth"; // Nommer la Terre pour l'identifier
 earthOrbit.add(terre);
 scene.add(earthOrbit);
 
@@ -146,6 +151,7 @@ const clouds = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
 clouds.position.set(5, 0, 0);
 clouds.receiveShadow = true;
 clouds.castShadow = true;
+clouds.name = "Earth"; // Nommer les nuages pour l'identifier
 earthOrbit.add(clouds);
 
 // Création de la Lune
@@ -159,6 +165,7 @@ const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 moon.position.set(1, 0, 0); // Relative à MoonOrbit
 moon.receiveShadow = true;
 moon.castShadow = true;
+moon.name = "Moon"; // Nommer la Lune pour l'identifier
 
 MoonOrbit.add(moon);
 earthOrbit.add(MoonOrbit);
@@ -173,6 +180,7 @@ const Mars = new THREE.Mesh(MarsGeometry, MarsMaterial);
 Mars.position.set(7, 0, 0);
 Mars.receiveShadow = true;
 Mars.castShadow = true;
+Mars.name = "Mars"; // Nommer Mars pour l'identifier
 marsOrbit.add(Mars);
 scene.add(marsOrbit);
 
@@ -185,6 +193,7 @@ const Jupiter = new THREE.Mesh(JupiterGeometry, JupiterMaterial);
 Jupiter.position.set(8.5, 0, 0);
 Jupiter.receiveShadow = true;
 Jupiter.castShadow = true;
+Jupiter.name = "Jupiter"; // Nommer Jupiter pour l'identifier
 jupiterOrbit.add(Jupiter);
 scene.add(jupiterOrbit);
 
@@ -197,6 +206,7 @@ const Saturn = new THREE.Mesh(SaturnGeometry, SaturnMaterial);
 Saturn.position.set(10, 0, 0);
 Saturn.receiveShadow = true;
 Saturn.castShadow = true;
+Saturn.name = "Saturn"; // Nommer Saturne pour l'identifier
 saturnOrbit.add(Saturn);
 scene.add(saturnOrbit);
 
@@ -211,6 +221,7 @@ const SaturnRingMaterial = new THREE.MeshBasicMaterial({
 const SaturnRing = new THREE.Mesh(SaturnRingGeometry, SaturnRingMaterial);
 SaturnRing.rotation.x = -Math.PI / 2;
 SaturnRing.position.set(10, 0, 0);
+SaturnRing.name = "Saturn"; // Nommer l'anneau de Saturne pour l'identifier
 saturnOrbit.add(SaturnRing);
 
 // URANUS
@@ -222,6 +233,7 @@ const Uranus = new THREE.Mesh(UranusGeometry, UranusMaterial);
 Uranus.position.set(11.5, 0, 0);
 Uranus.receiveShadow = true;
 Uranus.castShadow = true;
+Uranus.name = "Uranus"; // Nommer Uranus pour l'identifier
 uranusOrbit.add(Uranus);
 scene.add(uranusOrbit);
 
@@ -234,6 +246,7 @@ const Neptune = new THREE.Mesh(NeptuneGeometry, NeptuneMaterial);
 Neptune.position.set(12.5, 0, 0);
 Neptune.receiveShadow = true;
 Neptune.castShadow = true;
+Neptune.name = "Neptune"; // Nommer Neptune pour l'identifier
 neptuneOrbit.add(Neptune);
 scene.add(neptuneOrbit);
 
@@ -314,7 +327,184 @@ function animate() {
     Uranus.rotation.y += 0.002; // Rotation d'Uranus
     Neptune.rotation.y += 0.002; // Rotation de Neptune
 
+    updateInfoBox(moon, document.getElementById("infoBoxMoon"));
+    updateInfoBox(Venus, document.getElementById("infoBoxVenus"));
+    updateInfoBox(mercury, document.getElementById("infoBoxMercury"));
+    updateInfoBox(terre, document.getElementById("infoBoxEarth"));
+    updateInfoBox(moon, document.getElementById("infoBoxMoon"));
+    updateInfoBox(Mars, document.getElementById("infoBoxMars"));
+    updateInfoBox(Jupiter, document.getElementById("infoBoxJupiter"));
+    updateInfoBox(Saturn, document.getElementById("infoBoxSaturn"));
+    updateInfoBox(Uranus, document.getElementById("infoBoxUranus"));
+    updateInfoBox(Neptune, document.getElementById("infoBoxNeptune"));
+
+
 
     bloomComposer.render();
 
+}
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener('click', onClick, false);
+
+function onClick(event) {
+  // Position de la souris normalisée (-1 à +1)
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Mise à jour du rayon
+  raycaster.setFromCamera(mouse, camera);
+
+  // Raycast sans sélectionner les LineLoop (orbites)
+  const intersects = raycaster.intersectObjects(scene.children, true)
+    .filter(obj => obj.object.type !== "LineLoop");
+
+  if (intersects.length > 0) {
+    const clickedObject = intersects[0].object;
+    console.log("Objet cliqué :", clickedObject.name || clickedObject);
+
+    if (clickedObject.name === "Moon") {
+  const screenPos = toScreenPosition(moon, camera);
+  const infoBoxMoon = document.getElementById("infoBoxMoon");
+  infoBoxMoon.style.display = "block";
+  infoBoxMoon.style.left = `${screenPos.x + 20}px`;
+  infoBoxMoon.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxMoon").style.display = "none";
+}
+
+if (clickedObject.name === "Venus") {
+  const screenPos = toScreenPosition(Venus, camera);
+  const infoBoxVenus = document.getElementById("infoBoxVenus");
+  infoBoxVenus.style.display = "block";
+  infoBoxVenus.style.left = `${screenPos.x + 20}px`;
+  infoBoxVenus.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxVenus").style.display = "none";
+}
+
+if (clickedObject.name === "Mercury") {
+  const screenPos = toScreenPosition(mercury, camera);
+  const infoBoxMercury = document.getElementById("infoBoxMercury");
+  infoBoxMercury.style.display = "block";
+  infoBoxMercury.style.left = `${screenPos.x + 20}px`;
+  infoBoxMercury.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxMercury").style.display = "none";
+}
+
+if (clickedObject.name === "Earth") {
+  const screenPos = toScreenPosition(terre, camera);
+  const infoBoxEarth = document.getElementById("infoBoxEarth");
+  infoBoxEarth.style.display = "block";
+  infoBoxEarth.style.left = `${screenPos.x + 20}px`;
+  infoBoxEarth.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxEarth").style.display = "none";
+}
+
+if (clickedObject.name === "Mars") {
+  const screenPos = toScreenPosition(Mars, camera);
+  const infoBoxMars = document.getElementById("infoBoxMars");
+  infoBoxMars.style.display = "block";
+  infoBoxMars.style.left = `${screenPos.x + 20}px`;
+  infoBoxMars.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxMars").style.display = "none";
+}
+
+if (clickedObject.name === "Jupiter") {
+  const screenPos = toScreenPosition(Jupiter, camera);
+  const infoBoxJupiter = document.getElementById("infoBoxJupiter");
+  infoBoxJupiter.style.display = "block";
+  infoBoxJupiter.style.left = `${screenPos.x + 20}px`;
+  infoBoxJupiter.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxJupiter").style.display = "none";
+}
+
+if (clickedObject.name === "Saturn") {
+  const screenPos = toScreenPosition(Saturn, camera);
+  const infoBoxSaturn = document.getElementById("infoBoxSaturn");
+  infoBoxSaturn.style.display = "block";
+  infoBoxSaturn.style.left = `${screenPos.x + 20}px`;
+  infoBoxSaturn.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxSaturn").style.display = "none";
+}
+
+if (clickedObject.name === "Uranus") {
+  const screenPos = toScreenPosition(Uranus, camera);
+  const infoBoxUranus = document.getElementById("infoBoxUranus");
+  infoBoxUranus.style.display = "block";
+  infoBoxUranus.style.left = `${screenPos.x + 20}px`;
+  infoBoxUranus.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxUranus").style.display = "none";
+}
+
+if (clickedObject.name === "Neptune") {
+  const screenPos = toScreenPosition(Neptune, camera);
+  const infoBoxNeptune = document.getElementById("infoBoxNeptune");
+  infoBoxNeptune.style.display = "block";
+  infoBoxNeptune.style.left = `${screenPos.x + 20}px`;
+  infoBoxNeptune.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxNeptune").style.display = "none";
+}
+
+if (clickedObject.name === "Sun") {
+  const screenPos = toScreenPosition(sun, camera);
+  const infoBoxSun = document.getElementById("infoBoxSun");
+  infoBoxSun.style.display = "block";
+  infoBoxSun.style.left = `${screenPos.x + 20}px`;
+  infoBoxSun.style.top = `${screenPos.y - 20}px`;
+} else {
+  document.getElementById("infoBoxSun").style.display = "none";
+}
+
+  } else {
+    document.getElementById("infoBoxMoon").style.display = "none";
+    document.getElementById("infoBoxVenus").style.display = "none";
+  }
+}
+
+
+function toScreenPosition(obj, camera) {
+  const vector = new THREE.Vector3();
+  const widthHalf = window.innerWidth / 2;
+  const heightHalf = window.innerHeight / 2;
+
+  obj.updateMatrixWorld();
+  vector.setFromMatrixPosition(obj.matrixWorld);
+  vector.project(camera);
+
+  return {
+    x: (vector.x * widthHalf) + widthHalf,
+    y: -(vector.y * heightHalf) + heightHalf
+  };
+}
+
+
+function updateInfoBox(object3D, infoBoxElement) {
+  if (!infoBoxElement || infoBoxElement.style.display !== "block") return;
+
+  const screenPos = toScreenPosition(object3D, camera);
+  const boxWidth = infoBoxElement.offsetWidth;
+  const boxHeight = infoBoxElement.offsetHeight;
+
+  const isVisible =
+    screenPos.x > 0 &&
+    screenPos.y > 0 &&
+    screenPos.x + boxWidth < window.innerWidth &&
+    screenPos.y + boxHeight < window.innerHeight;
+
+  if (isVisible) {
+    infoBoxElement.style.left = `${screenPos.x + 20}px`;
+    infoBoxElement.style.top = `${screenPos.y - 20}px`;
+  } else {
+    infoBoxElement.style.display = "none";
+  }
 }

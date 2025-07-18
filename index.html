@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>My first three.js app</title>
+    <title>Solar System</title>
     <style>
       body {
         margin: 0;
@@ -10,36 +10,64 @@
     </style>
   </head>
   <body>
-    <div id="infoBoxMoon" style="
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px;
-      border: 2px solid black;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-      max-width: 300px;
-      z-index: 999;">
+    <!-- Lune -->
+    <div id="infoBoxMoon" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
       <strong>Lune 🌕</strong><br />
-      La Lune est le seul satellite naturel permanent de la Terre. Elle influence les marées et a toujours fasciné les civilisations humaines.
+      La Lune est le satellite naturel de la Terre. Elle influence les marées et rythme le calendrier lunaire depuis des millénaires.
     </div>
     
-    <div id="infoBoxKawai" style="
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px;
-      border: 2px solid black;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-      max-width: 300px;
-      z-index: 999;">
-      <strong>Kawai</strong><br />
-      Ce champignon Kawai est vraiment trop cuteeeeeeeeeeeeeee !!!!
+    <!-- Vénus -->
+    <div id="infoBoxVenus" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Vénus ♀️</strong><br />
+      Vénus est la deuxième planète du système solaire. Sa surface brûlante est cachée par une épaisse atmosphère riche en dioxyde de carbone.
+    </div>
+    
+    <!-- Mercure -->
+    <div id="infoBoxMercury" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Mercure ☿️</strong><br />
+      Mercure est la planète la plus proche du Soleil. Elle est petite, rocheuse et possède de très grandes amplitudes thermiques.
+    </div>
+    
+    <!-- Terre -->
+    <div id="infoBoxEarth" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Terre 🌍</strong><br />
+      La Terre est notre planète. Elle est la seule connue à abriter la vie et possède une atmosphère riche en oxygène.
+    </div>
+    
+    <!-- Mars -->
+    <div id="infoBoxMars" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Mars ♂️</strong><br />
+      Mars, la planète rouge, intrigue les scientifiques pour sa possible habitabilité passée. Elle possède d’immenses volcans et canyons.
+    </div>
+    
+    <!-- Jupiter -->
+    <div id="infoBoxJupiter" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Jupiter ♃</strong><br />
+      Jupiter est la plus grande planète du système solaire. Elle est connue pour sa Grande Tache Rouge, une tempête géante persistante.
+    </div>
+    
+    <!-- Saturne -->
+    <div id="infoBoxSaturn" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Saturne ♄</strong><br />
+      Saturne est célèbre pour ses magnifiques anneaux composés de glace et de poussière. C’est une géante gazeuse.
+    </div>
+    
+    <!-- Uranus -->
+    <div id="infoBoxUranus" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Uranus ♅</strong><br />
+      Uranus est une planète glacée qui tourne presque couchée sur le côté. Son atmosphère contient du méthane, ce qui lui donne une couleur bleu-vert.
+    </div>
+    
+    <!-- Neptune -->
+    <div id="infoBoxNeptune" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Neptune ♆</strong><br />
+      Neptune est la planète la plus éloignée du Soleil. Elle est connue pour ses vents extrêmement violents et sa couleur bleue profonde.
+    </div>
+    
+    <!-- Soleil -->
+    <div id="infoBoxSun" style="display: none; position: absolute; top: 20px; left: 20px; background: white; padding: 15px; border: 2px solid black; border-radius: 8px; font-family: Arial, sans-serif; max-width: 300px; z-index: 999;">
+      <strong>Soleil ☀️</strong><br />
+      Le Soleil est l'étoile centrale de notre système solaire, source principale d'énergie et lumière pour les planètes.
     </div>
 
     <script type="module" src="./main.js"></script>
