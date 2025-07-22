@@ -92,9 +92,3 @@ Threejs-project/
 Tous les droits de ce projet sont réservés à **Luc Sarrazin**. Aucune redistribution, modification ou utilisation commerciale n’est autorisée sans autorisation préalable.
 
 ---
-
-## 📜 Licence
-
-Ce projet est sous licence MIT — libre de l'utiliser, modifier et redistribuer.
-
----
