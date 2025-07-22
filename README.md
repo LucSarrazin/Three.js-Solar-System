@@ -4,12 +4,6 @@ Une simulation 3D interactive du système solaire réalisée avec **Three.js**, 
 
 ---
 
-## 📸 Aperçu
-
-![screenshot](public/screenshot.jpg) <!-- Remplace ou supprime si tu n’as pas encore d’image -->
-
----
-
 ## 🚀 Fonctionnalités
 
 - 🌞 Représentation 3D du Soleil et des 8 planètes principales (ainsi que la Lune)
@@ -28,6 +22,8 @@ Une simulation 3D interactive du système solaire réalisée avec **Three.js**, 
 - WebGL (via `WebGLRenderer`)
 - Effets de post-traitement : `UnrealBloomPass`
 - Contrôles caméra : `OrbitControls`
+- Vite
+- JavaScript
 - HTML / CSS vanilla
 
 ---
