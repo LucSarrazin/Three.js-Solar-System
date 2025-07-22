@@ -89,7 +89,7 @@ Threejs-project/
 
 ## ✍️ Auteur
 
-Développé par **Luc Sarrazin**, étudiant en informatique passionné par les moteurs 3D et la programmation interactive.
+Tous les droits de ce projet sont réservés à **Luc Sarrazin**. Aucune redistribution, modification ou utilisation commerciale n’est autorisée sans autorisation préalable.
 
 ---
 
